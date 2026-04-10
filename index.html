@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Адаптивность для телефонов -->
     <title>Заметки</title> <!-- Заголовок во вкладке браузера -->
     <!-- Подключение внешнего CSS файла -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <header>Шапка</header>
         <div class="notes">
             <h1>Заметки</h1>
-            <button id="btn-add">Добавить заметку</button>
             <div class="container">
+                <div id="result"></div>
+                <button id="btn-add">Добавить заметку</button>
+                <div id="form-container" class="hidden">
+                    <input type="text" id="note-name" placeholder="Название заметки">
+                    <input type="text" id="note-description" placeholder="Текст заметки">
+                    <button id="done-btn">Готово</button>
+                </div>
+                <div class="note-list">
+                    <h1>Мои заметки</h1>
+
+                </div>
 
             </div>
         </div>

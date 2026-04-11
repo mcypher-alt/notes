@@ -1,3 +1,26 @@
 .hidden {
     display: none !important;
 }
+.note-text {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    /* Плавность раскрытия */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    z-index: 10;
+}
+.note-text.open {
+    max-height: 150px;
+}
+.note {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 250px;
+    position: relative; /* Чтобы выпадающее меню не улетало */
+    margin-bottom: 20px;
+}

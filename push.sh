@@ -21,13 +21,13 @@ read commit_message
 
 git commit -m "$commit_message"
 
-echo -e "${GREEN}🚀 Пушим в main? (y/n)${NC}"
+echo -e "${GREEN}🚀 Пушим в master? (y/n)${NC}"
 read push_answer
 if [ "$push_answer" != "y" ]; then
     echo -e "${RED}❌ Пуш отменён${NC}"
     exit 0
 fi
 
-git push origin main
+git push origin master
 
 echo -e "${GREEN}✅ Готово!${NC}"

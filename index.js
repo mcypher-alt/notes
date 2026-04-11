@@ -57,12 +57,12 @@ function noteListUpdate() {
     }
 }
 
-function newNote(note, orderDigit) {
+function newNote(note) {
     noteList.insertAdjacentHTML('beforeend',`
     <div class='note'>
         <div class='hidden'>${note.id}</div>
         <button class='delete-btn'>Удалить</button>
-        <button class='toggle-btn'>${orderDigit + 1}.${note.title}</button>
+        <button class='toggle-btn'>${note.title}</button>
             <div class='note-text'>
                 <p>${note.text}</p>
             </div>

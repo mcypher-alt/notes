@@ -23,6 +23,10 @@ footer {
     margin-top: 2rem;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .notes {
     max-width: 1200px;
     margin: 0 auto;
@@ -120,7 +124,7 @@ footer {
     font-weight: bold;
     background: #d4edda;
     color: #155724;
-    animation: fadeOut 3s forwards;
+    /* Убираем анимацию */
 }
 
 @keyframes fadeOut {

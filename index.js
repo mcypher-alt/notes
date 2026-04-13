@@ -1,7 +1,8 @@
 "use strict"
-import { noteListUpdate } from "./js/ui.js";
+import { noteListUpdate, searchFunc } from "./js/ui.js";
 import { saveNote, getNotes } from "./js/storage.js";
 
+const inputField = document.querySelector('#search-input');
 const openBtn1 = document.querySelector('#btn-add1');
 const doneBtn = document.querySelector('#done-btn');
 const formContainer = document.querySelector('#form-container');
@@ -24,11 +25,16 @@ function addNote(nameValue, descriptionValue) {
     };
     notes.push(newNote);
     saveNote(notes);
-    noteListUpdate();  // ✅ обновляем UI
+    noteListUpdate(getNotes());  // ✅ обновляем UI
     return "Новая заметка добавлена!";
 }
 
-noteListUpdate();
+noteListUpdate(getNotes());
+
+inputField.addEventListener('input', (event) => {
+    const currentText = event.target.value;
+    noteListUpdate(searchFunc(currentText));
+})
 
 openBtn1.addEventListener('click', () => {
     formContainer.classList.remove('hidden');

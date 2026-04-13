@@ -17,12 +17,17 @@ function newNote(note) {
     `);
 };
 
-export function noteListUpdate() {
-    const newNotes = getNotes();
+export function noteListUpdate(newNotes) {
     noteList.innerHTML = '';
     if(newNotes.length != 0) {
         for(let i = 0; i < newNotes.length; i++) {
             newNote(newNotes[i], i);
         }
     }
+}
+
+export function searchFunc(searchWord) {
+    searchWord = escapeHtml(searchWord);
+    const notes = getNotes().filter((object) => object.title.includes(searchWord));
+    return notes;
 }

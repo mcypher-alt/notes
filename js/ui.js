@@ -21,13 +21,15 @@ export function noteListUpdate(newNotes) {
     noteList.innerHTML = '';
     if(newNotes.length != 0) {
         for(let i = 0; i < newNotes.length; i++) {
-            newNote(newNotes[i], i);
+            newNote(newNotes[i]);
         }
+        return;
     }
+    noteList.innerHTML = 'Ничего не найдено'
 }
 
 export function searchFunc(searchWord) {
-    searchWord = escapeHtml(searchWord);
-    const notes = getNotes().filter((object) => object.title.includes(searchWord));
+    const notes = getNotes().filter((object) => object.title.toLowerCase().includes(searchWord.toLowerCase()));
+    if(notes.length ===  0) return [];
     return notes;
 }

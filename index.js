@@ -54,6 +54,7 @@ doneBtn.addEventListener('click', () => {
     noteDesc.value = '';
     const result = addNote(noteValue, noteDescription);
     resultDiv.textContent = result;
+    inputField.value = '';
 });
 
 backBtn.addEventListener('click', () => {

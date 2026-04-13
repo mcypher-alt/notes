@@ -1,5 +1,6 @@
 "use strict"
-import { escapeHtml } from "./js/safeHTML.js";
+import { noteListUpdate } from "./js/ui.js";
+import { saveNote, getNotes } from "./js/storage.js";
 
 const openBtn1 = document.querySelector('#btn-add1');
 const doneBtn = document.querySelector('#done-btn');
@@ -9,6 +10,24 @@ const noteDesc = document.querySelector('#note-description');
 const resultDiv = document.querySelector('#result');
 const noteList = document.querySelector('.note-list');
 const backBtn = document.querySelector('#back-btn');
+
+function addNote(nameValue, descriptionValue) {
+    if (nameValue === '' || descriptionValue === '') {
+        return "Поля ввода не могут быть пустыми!";
+    }
+    const notes = getNotes();
+    const newNote = {
+        id: Date.now(),
+        title: nameValue,
+        text: descriptionValue,
+        createdAt: new Date().toISOString()
+    };
+    notes.push(newNote);
+    saveNote(notes);
+    noteListUpdate();  // ✅ обновляем UI
+    return "Новая заметка добавлена!";
+}
+
 noteListUpdate();
 
 openBtn1.addEventListener('click', () => {
@@ -38,49 +57,6 @@ backBtn.addEventListener('click', () => {
     noteDesc.value = '';
 });
 
-function getNotes() {
-    const notes = localStorage.getItem('notes');
-    return notes ? JSON.parse(notes) : [];
-}
-
-function addNote(nameValue, descriptionValue) {
-    const notes = getNotes();
-    if (nameValue !== '' && descriptionValue !== '') {
-        const Note = {
-        id: Date.now(),      // уникальный ID (хеш по времени)
-        title: nameValue,
-        text: descriptionValue,
-        createdAt: new Date().toISOString()
-    };
-    notes.push(Note);
-    newNote(Note);
-    localStorage.setItem('notes', JSON.stringify(notes));
-    return "Новая заметка добавлена!";
-    }
-}
-
-function noteListUpdate() {
-    const notes = getNotes();
-    if(notes.length != 0) {
-        for(let i = 0; i < notes.length; i++) {
-            newNote(notes[i], i);
-        }
-    }
-}
-
-function newNote(note) {
-    noteList.insertAdjacentHTML('beforeend',`
-    <div class='note'>
-        <div class='hidden'>${note.id}</div>
-        <button class='delete-btn'>Удалить</button>
-        <button class='toggle-btn'>${escapeHtml(note.title)}</button>
-            <div class='note-text'>
-                <p>${escapeHtml(note.text)}</p>
-            </div>
-    </div>
-    `);
-};
-
 noteList.addEventListener('click', (event) => {
     const button = event.target;
     if (button.classList.contains('toggle-btn')) {
@@ -100,7 +76,7 @@ noteList.addEventListener('click', (event) => {
             for(let i = 0; i < notes.length; i++) {
                 if(notes[i].id == noteId) {
                     notes.splice(i, 1);
-                    localStorage.setItem('notes', JSON.stringify(notes));
+                    saveNote(notes);
                     note.remove();
                     break;
                 }

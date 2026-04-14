@@ -3,6 +3,7 @@ import { noteListUpdate, searchFunc } from "./js/ui.js";
 import { saveNote, getNotes, darkThemeStorage } from "./js/storage.js";
 import { BUTTONS, DIVS } from "./js/constants.js";
 
+
 function addNote(nameValue, descriptionValue) {
     if (nameValue === '' || descriptionValue === '') {
         return "Поля ввода не могут быть пустыми!";

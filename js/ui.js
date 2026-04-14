@@ -20,7 +20,7 @@ function newNote(note) {
 
 export function noteListUpdate(newNotes) {
     noteList.innerHTML = '';
-    if(newNotes.length != 0) {
+    if(newNotes.length !== 0) {
         for(let i = 0; i < newNotes.length; i++) {
             newNote(newNotes[i]);
         }

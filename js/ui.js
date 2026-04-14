@@ -1,8 +1,9 @@
 "use strict"
 import { escapeHtml } from "./safeHTML.js";
 import { getNotes } from "./storage.js";
+import { DIVS } from "./constants.js";
 
-const noteList = document.querySelector('.note-list');
+const noteList = DIVS.noteList;
 
 function newNote(note) {
     noteList.insertAdjacentHTML('beforeend',`

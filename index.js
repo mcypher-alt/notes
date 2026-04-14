@@ -1,16 +1,7 @@
 "use strict"
 import { noteListUpdate, searchFunc } from "./js/ui.js";
-import { saveNote, getNotes } from "./js/storage.js";
-
-const inputField = document.querySelector('#search-input');
-const openBtn1 = document.querySelector('#btn-add1');
-const doneBtn = document.querySelector('#done-btn');
-const formContainer = document.querySelector('#form-container');
-const noteName = document.querySelector('#note-name');
-const noteDesc = document.querySelector('#note-description');
-const resultDiv = document.querySelector('#result');
-const noteList = document.querySelector('.note-list');
-const backBtn = document.querySelector('#back-btn');
+import { saveNote, getNotes, darkThemeStorage } from "./js/storage.js";
+import { BUTTONS, DIVS } from "./js/constants.js";
 
 function addNote(nameValue, descriptionValue) {
     if (nameValue === '' || descriptionValue === '') {
@@ -31,40 +22,49 @@ function addNote(nameValue, descriptionValue) {
 
 noteListUpdate(getNotes());
 
-inputField.addEventListener('input', (event) => {
+BUTTONS.themeBtn.addEventListener('click', () => {
+    const circle = document.querySelector('.transition');
+    circle.classList.toggle('is-active');
+    const body = document.body.classList;
+    body.toggle('dark-theme');
+    darkThemeStorage(body);
+});
+
+BUTTONS.inputField.addEventListener('input', (event) => {
     const currentText = event.target.value;
     noteListUpdate(searchFunc(currentText));
 })
 
-openBtn1.addEventListener('click', () => {
-    formContainer.classList.remove('hidden');
-    openBtn1.classList.add('hidden');
-    resultDiv.textContent = '';
+BUTTONS.openBtn.addEventListener('click', () => {
+    DIVS.formContainer.classList.remove('hidden');
+    BUTTONS.openBtn.classList.add('hidden');
+    DIVS.result.textContent = '';
 })
 
-doneBtn.addEventListener('click', () => {
-    let noteValue = noteName.value.trim();
-    let noteDescription = noteDesc.value.trim();
+BUTTONS.doneBtn.addEventListener('click', () => {
+    let noteValue = DIVS.noteName.value.trim();
+    let noteDescription = DIVS.noteDesc.value.trim();
 
     if(noteValue === '' || noteDescription === '') {
-        resultDiv.textContent = 'Поля ввода не могут быть пустыми!';
+        DIVS.result.textContent = 'Поля ввода не могут быть пустыми!';
         return;
     };
-    noteName.value = '';
-    noteDesc.value = '';
+    DIVS.noteName.value = '';
+    DIVS.noteDesc.value = '';
     const result = addNote(noteValue, noteDescription);
-    resultDiv.textContent = result;
-    inputField.value = '';
+    DIVS.result.textContent = result;
+    BUTTONS.inputField.value = '';
+    BUTTONS.inputField.focus();
 });
 
-backBtn.addEventListener('click', () => {
-    formContainer.classList.add('hidden');
-    openBtn1.classList.remove('hidden');
-    noteName.value = '';
-    noteDesc.value = '';
+BUTTONS.backBtn.addEventListener('click', () => {
+    DIVS.formContainer.classList.add('hidden');
+    BUTTONS.openBtn.classList.remove('hidden');
+    DIVS.noteName.value = '';
+    DIVS.noteDesc.value = '';
 });
 
-noteList.addEventListener('click', (event) => {
+DIVS.noteList.addEventListener('click', (event) => {
     const button = event.target;
     if (button.classList.contains('toggle-btn')) {
         // 4. Находим карточку, в которой лежит эта кнопка

@@ -13,7 +13,7 @@
             <h1>Заметки</h1>
             <div class="container">
                 <div id="result"></div>
-                <button id="btn-add1">Добавить заметку</button>
+                <button id="btn-add">Добавить заметку</button>
                 <div id="form-container" class="hidden">
                     <input type="text" id="note-name" placeholder="Название заметки">
                     <input type="text" id="note-description" placeholder="Текст заметки">
@@ -21,6 +21,11 @@
                     <button id="done-btn">Готово</button>
                 </div>
                 <input type="text" id="search-input" placeholder="Название заметки...">
+                <button id="toggle-theme">
+                    <div class="transition"></div>
+                    <span class="gradient"></span>
+                    <span class="label">Тема</span>
+                </button>
                 <div class="note-list">
                     <h1>Мои заметки</h1>
 
@@ -29,6 +34,7 @@
             </div>
         </div>
         <footer>Подвал</footer>
+        <script src="js/RenderingScript.js"></script>
         <script type="module" src="index.js"></script>
     </body>
 </html>

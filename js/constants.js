@@ -6,6 +6,7 @@ export const BUTTONS = {
     doneBtn: document.querySelector('#done-btn'),
     backBtn: document.querySelector('#back-btn'),
     themeBtn: document.querySelector('#toggle-theme'),
+    editBtn: document.querySelector('.edit-btn'),
 };
 
 export const DIVS = {

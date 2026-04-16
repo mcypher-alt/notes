@@ -13,7 +13,7 @@ function addNote(nameValue, descriptionValue) {
         id: Date.now(),
         title: nameValue,
         text: descriptionValue,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
     };
     notes.push(newNote);
     saveNote(notes);
@@ -66,7 +66,7 @@ BUTTONS.backBtn.addEventListener('click', () => {
 });
 
 DIVS.noteList.addEventListener('click', (event) => {
-    const button = event.target;
+    const button = event.target.closest('button');;
     if (button.classList.contains('toggle-btn')) {
         // 4. Находим карточку, в которой лежит эта кнопка
         const note = button.closest('.note');
@@ -88,6 +88,24 @@ DIVS.noteList.addEventListener('click', (event) => {
                     note.remove();
                     break;
                 }
+            }
+        }
+    }
+    else if (button.classList.contains('edit-btn')) {
+        const note = button.closest('.note');
+        const idBlock = note.querySelector('.hidden');
+        const noteId = idBlock.textContent.trim();
+        const p = note.querySelector('.note-text-content p');
+        const currentText = p.textContent;
+        const newText = prompt('Редактировать заметку:', currentText);
+        if (newText !== null && newText.trim() !== '') {
+            p.textContent = newText;
+            const notes = getNotes();
+            const index = notes.findIndex(n => n.id == noteId);
+            if (index !== -1) {
+                notes[index].text = newText;
+                notes[index].editDate = new Date().toISOString();
+                saveNote(notes);
             }
         }
     }
